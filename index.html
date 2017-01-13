@@ -4,7 +4,7 @@
 <head>
   <meta charset="utf-8">
 
-  <title>Animals are Great!</title>
+  <title>Workout App</title>
 
   <!-- Bootstrap CSS -->
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
@@ -21,16 +21,20 @@
 </head>
 
 <body>
-  <div class="inputForm">
-    <div class="form-group">
-      <label for="exampleTextarea">What is your favorite animal?</label>
-      <textarea class="form-control" id="exampleTextarea" rows="3"></textarea>
+  <div class="container">
+    <div class="jumbotron">
+      <h1>Workout Wizard</h1>
+      <p class="instruction">What muscle group do you want to work out today?</p>
+    <div class="list-group">
+      <a id="Back" class="list-group-item">Back</a>
+      <a id="Chest" class="list-group-item">Chest</a>
+      <a id="Legs" class="list-group-item">Legs</a>
+      <a id="Core" class="list-group-item">Core</a>
+      <a id="Arms" class="list-group-item">Arms</a>
+      <a id="FullBody" class="list-group-item">Full Body</a>
     </div>
-    <button id="submitbutton" type="button" class="btn btn-default">Submit</button>
   </div>
-  <div class="responseArea">
-    <h1>I agree, animals are great!</h1>
-  </div>
+</div>
 
 </body>
 
