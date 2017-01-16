@@ -6,6 +6,8 @@
 
   <title>Workout App</title>
 
+  <!-- Firebase CDN -->
+  <script src="https://www.gstatic.com/firebasejs/3.6.4/firebase.js"></script>
   <!-- Bootstrap CSS -->
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
   <!-- font awesome -->
@@ -14,8 +16,6 @@
   <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"> -->
   <!-- jQuery -->
   <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
-  <!-- Firebase CDN -->
-  <script src="https://www.gstatic.com/firebasejs/3.6.4/firebase.js"></script>
   <!-- js -->
   <script src="app.js"></script>
 </head>
@@ -25,14 +25,124 @@
     <div class="jumbotron">
       <h1>Workout Wizard</h1>
       <p class="instruction">What muscle group do you want to work out today?</p>
-    <div class="list-group">
-      <a id="Back" class="list-group-item">Back</a>
-      <a id="Chest" class="list-group-item">Chest</a>
-      <a id="Leg" class="list-group-item">Leg</a>
-      <a id="Core" class="list-group-item">Core</a>
-      <a id="Arm" class="list-group-item">Arm</a>
-      <a id="Shoulder" class="list-group-item">Shoulder</a>
-      <a id="FullBody" class="list-group-item">Full Body</a>
+    <div id= "workoutcontainer" class="list-group workout-group">
+      <a id="Back" class="list-group-item workout-item">Back</a>
+      <a id="Chest" class="list-group-item workout-item">Chest</a>
+      <a id="Leg" class="list-group-item workout-item">Leg</a>
+      <a id="Core" class="list-group-item workout-item">Core</a>
+      <a id="Arm" class="list-group-item workout-item">Arm</a>
+      <a id="Shoulder" class="list-group-item workout-item">Shoulder</a>
+      <a id="FullBody" class="list-group-item workout-item">Full Body</a>
+    </div>
+
+    <div id="exercisecontainer" class="container hide">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h3 id="onerep" class="panel-title">Placeholder Text</h3>
+          <div class="form-group">
+            <input type="text" class="form-control oneRepAmount" id="inputsm">
+            <button type="submit" class="btn btn-default">Submit</button>
+          </div>
+        </div>
+        <ul class="list-group exercise">
+          <li class="list-group-item exercise">
+            <div class="row toggle" id="dropdown-detail-1" data-toggle="detail-1">
+              <div class="col-xs-10">
+                Exercise 1: Please estimate your one rep max!
+              </div>
+              <div class="col-xs-2"><i class="fa fa-chevron-down pull-right"></i></div>
+            </div>
+            <div id="detail-1">
+              <hr></hr>
+              <div class="container">
+                <div class="fluid-row">
+                  <div class="exercise1">
+
+                  </div>
+                </div>
+              </div>
+            </div>
+          </li>
+          <li class="list-group-item exercise">
+            <div class="row toggle" id="dropdown-detail-2" data-toggle="detail-2">
+              <div class="col-xs-10">
+                Excercise 2: Please estimate your one rep max!
+              </div>
+              <div class="col-xs-2"><i class="fa fa-chevron-down pull-right"></i></div>
+            </div>
+            <div id="detail-2">
+              <hr></hr>
+              <div class="container">
+                <div class="fluid-row">
+                  <div class="exercise2">
+
+                  </div>
+                </div>
+              </div>
+            </div>
+          </li>
+          <li class="list-group-item exercise">
+            <div class="row toggle" id="dropdown-detail-3" data-toggle="detail-3">
+              <div class="col-xs-10">
+                Excercise 3: Please estimate your one rep max!
+              </div>
+              <div class="col-xs-2"><i class="fa fa-chevron-down pull-right"></i></div>
+            </div>
+            <div id="detail-3">
+              <hr></hr>
+              <div class="container">
+                <div class="fluid-row">
+                  <div class="exercise3">
+
+                  </div>
+                </div>
+              </div>
+            </div>
+          </li>
+          <li class="list-group-item exercise">
+            <div class="row toggle" id="dropdown-detail-4" data-toggle="detail-4">
+              <div class="col-xs-10">
+                Excercise 4: Please estimate your one rep max!
+              </div>
+              <div class="col-xs-2"><i class="fa fa-chevron-down pull-right"></i></div>
+            </div>
+            <div id="detail-4">
+              <hr></hr>
+              <div class="container">
+                <div class="fluid-row">
+                  <div class="excercise4">
+
+                  </div>
+                </div>
+              </div>
+            </div>
+          </li>
+          <li class="list-group-item exercise">
+            <div class="row toggle" id="dropdown-detail-5" data-toggle="detail-5">
+              <div class="col-xs-10">
+                Excercise 5: Please estimate your one rep max!
+              </div>
+              <div class="col-xs-2"><i class="fa fa-chevron-down pull-right"></i></div>
+            </div>
+            <div id="detail-5">
+              <hr></hr>
+              <div class="container">
+                <div class="fluid-row">
+                  <div class="excercise5">
+
+                  </div>
+                </div>
+              </div>
+            </div>
+          </li>
+          <li id= 'exerciseBackButton' class="list-group-item exerciseBackButton">
+            <div class="row toggle" id="exerciseBack">
+              <div class="col-xs-10">
+                Back to Workout Selection
+              </div>
+            </div>
+        </ul>
+      </div>
     </div>
   </div>
 </div>
