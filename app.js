@@ -11,8 +11,6 @@ var config = {
 var routineObject = {}
 var db = firebase.database();
 
-
-
 $(document).ready(function(){
   var muscleGroups = ['Back', 'Chest', 'Leg', 'Core', 'Arm', 'Shoulder', 'Full Body']
   var muscleGroupsNav = ['Back', 'Chest', 'Leg', 'Core', 'Arm', 'Shoulder', 'Full Body', 'FullBody']
@@ -24,7 +22,7 @@ $(document).ready(function(){
     if ($('.oneRepAmount').val() === ''){
       alert('Please estimate your one rep max. A rough estimate is good enough!')
     }
-    console.log('button was pressed')
+    // console.log('button was pressed')
 
     const dbRefObject = db.ref().child(currentMuscle+'/Exercises');
     dbRefObject.on('value', snap => {
@@ -46,15 +44,35 @@ $(document).ready(function(){
       $('#dropdown-detail-5').children('.col-xs-10').append(' - '+routineObject.Strength.Fifth.Set+' sets')
     }
 
+    function populateSets(){
+      $('.exercise1').html('1 set x '+routineObject.Strength.First.Warmup.Set1.Rep+' reps @ '+(Math.floor($('.oneRepAmount').val()*routineObject.Strength.First.Warmup.Set1.Weight))+' lbs'+' <br>')
+      $('.exercise1').append('1 set x '+routineObject.Strength.First.Warmup.Set2.Rep+' reps @ '+(Math.floor($('.oneRepAmount').val()*routineObject.Strength.First.Warmup.Set2.Weight))+' lbs'+' <br>')
+      $('.exercise1').append('1 set x '+routineObject.Strength.First.Warmup.Set3.Rep+' reps @ '+(Math.floor($('.oneRepAmount').val()*routineObject.Strength.First.Warmup.Set3.Weight))+' lbs'+' <br>')
+      $('.exercise2').text(routineObject.Strength.Second.Set+' sets x '+routineObject.Strength.Second.Rep+' reps @ '+(Math.floor($('.oneRepAmount').val()*routineObject.Strength.Second.Weight))+' lbs')
+      $('.exercise3').text(routineObject.Strength.Third.Set+' sets x '+routineObject.Strength.Third.Rep+' reps @ '+(Math.floor($('.oneRepAmount').val()*routineObject.Strength.Third.Weight))+' lbs')
+      $('.exercise4').text(routineObject.Strength.Fourth.Set+' sets x '+routineObject.Strength.Fourth.Rep+' reps @ '+(Math.floor($('.oneRepAmount').val()*routineObject.Strength.Fourth.Weight))+' lbs')
+      $('.exercise5').text(routineObject.Strength.Fifth.Set+' sets x '+routineObject.Strength.Fifth.Rep+' reps @ '+(Math.floor($('.oneRepAmount').val()*routineObject.Strength.Fifth.Weight))+' lbs')
+      // console.log('populateSet was ran')
+      // console.log(($('.oneRepAmount').val()*routineObject.Strength.Second.Weight))
+      // console.log(routineObject.Strength.Second.Set)
+      // console.log(routineObject.Strength.Second.Rep)
+    }
+
     if (currentWorkout === 'Increase Strength') {
       const dbRefObject = db.ref().child(currentMuscle+'/Workouts');
       dbRefObject.on('value', snap => {
-        console.log(snap.val());
+        // console.log(snap.val());
         routineObject = snap.val();
         var working = Object.keys(routineObject.Strength.First.Working).length;
         var warmup = Object.keys(routineObject.Strength.First.Warmup).length;
         $('#dropdown-detail-1').children('.col-xs-10').append(' - '+(working+warmup)+' sets')
         setExercises();
+        populateSets();
+        $('.exercise1').append('1 set x '+routineObject.Strength.First.Working.Set1.Rep+' reps @ '+(Math.floor($('.oneRepAmount').val()*routineObject.Strength.First.Working.Set1.Weight))+' lbs'+' <br>')
+        $('.exercise1').append('1 set x '+routineObject.Strength.First.Working.Set2.Rep+' reps @ '+(Math.floor($('.oneRepAmount').val()*routineObject.Strength.First.Working.Set2.Weight))+' lbs'+' <br>')
+        $('.exercise1').append('1 set x '+routineObject.Strength.First.Working.Set3.Rep+' reps @ '+(Math.floor($('.oneRepAmount').val()*routineObject.Strength.First.Working.Set3.Weight))+' lbs'+' <br>')
+        $('.exercise1').append('1 set x '+routineObject.Strength.First.Working.Set4.Rep+' reps @ '+(Math.floor($('.oneRepAmount').val()*routineObject.Strength.First.Working.Set4.Weight))+' lbs'+' <br>')
+        $('.exercise1').append('1 set x '+routineObject.Strength.First.Working.Set5.Rep+' reps @ '+(Math.floor($('.oneRepAmount').val()*routineObject.Strength.First.Working.Set5.Weight))+' lbs')
       });
 
     } else if (currentWorkout === 'Increase Size') {
@@ -64,7 +82,9 @@ $(document).ready(function(){
         routineObject = snap.val();
         var warmup = Object.keys(routineObject.Strength.First.Warmup).length;
         setExercises();
+        populateSets();
         $('#dropdown-detail-1').children('.col-xs-10').append(' - '+(routineObject.Size.First.Working.Set+warmup)+' sets')
+          $('.exercise1').append(routineObject.Size.First.Working.Set+' sets x '+routineObject.Size.First.Working.Rep+' reps @ '+(Math.floor($('.oneRepAmount').val()*routineObject.Size.First.Working.Weight))+' lbs')
       });
 
     } else if (currentWorkout === 'Test One Rep Max') {
@@ -76,6 +96,12 @@ $(document).ready(function(){
         var warmup = Object.keys(routineObject.Strength.First.Warmup).length;
         $('#dropdown-detail-1').children('.col-xs-10').append(' - '+(working+warmup)+' sets')
         setExercises();
+        populateSets();
+        $('.exercise1').append('1 set x '+routineObject.OneRep.Working.Set1.Rep+' reps @ '+(Math.floor($('.oneRepAmount').val()*routineObject.OneRep.Working.Set1.Weight))+' lbs'+' <br>')
+        $('.exercise1').append('1 set x '+routineObject.OneRep.Working.Set2.Rep+' reps @ '+(Math.floor($('.oneRepAmount').val()*routineObject.OneRep.Working.Set2.Weight))+' lbs'+' <br>')
+        $('.exercise1').append('1 set x '+routineObject.OneRep.Working.Set3.Rep+' reps @ '+(Math.floor($('.oneRepAmount').val()*routineObject.OneRep.Working.Set3.Weight))+' lbs'+' <br>')
+        $('.exercise1').append('1 set x '+routineObject.OneRep.Working.Set4.Rep+' reps @ '+(Math.floor($('.oneRepAmount').val()*routineObject.OneRep.Working.Set4.Weight))+' lbs'+' <br>')
+        $('.exercise1').append('1 set x '+routineObject.OneRep.Working.Set5.Rep+' reps @ '+(Math.floor($('.oneRepAmount').val()*routineObject.OneRep.Working.Set5.Weight))+' lbs')
       });
 
     } else {
@@ -91,14 +117,66 @@ $(document).ready(function(){
       // console.log(response.currentTarget.id)
       if (response.currentTarget.id === 'dropdown-detail-1'){
         $('#detail-1').slideToggle()
+        // console.log($('#video1').attr('class'))
+        var videoSrc = 'https://www.youtube.com/embed/YCg1YxMt3oY?rel=0'
+            //would be a API call based on muscleMuscle + how to but I can't seem to get the youtube api key working. Would return a video ID that i would add into the embed URL above
+        if ($('#video1').attr('class') === 'auto'){
+          $('.exerciseVideo1').empty();
+        } else {
+        $('.exerciseVideo1').html('<iframe id="video1" width="420" height="315" src='+videoSrc+' frameborder="0" allowfullscreen wmode="Opaque"></iframe>')
+        $('#video1')[0].src += '&autoplay=1';
+        $('#video1').attr('class', 'auto')
+        }
+
+        response.preventDefault();
       } else if (response.currentTarget.id === 'dropdown-detail-2'){
         $('#detail-2').slideToggle()
+        var videoSrc = 'https://www.youtube.com/embed/-koP10y1qZI?rel=0'
+          //would be a API call based on muscleMuscle + how to but I can't seem to get the youtube api key working. Would return a video ID that i would add into the embed URL above
+        if ($('#video2').attr('class') === 'auto'){
+          $('.exerciseVideo2').empty();
+        } else {
+        $('.exerciseVideo2').html('<iframe id="video2" width="420" height="315" src='+videoSrc+' frameborder="0" allowfullscreen wmode="Opaque"></iframe>')
+        $('#video2')[0].src += '&autoplay=1';
+        $('#video2').attr('class', 'auto')
+        }
+        response.preventDefault();
       } else if (response.currentTarget.id === 'dropdown-detail-3'){
         $('#detail-3').slideToggle()
+        var videoSrc = 'https://www.youtube.com/embed/u3gQT2aMVaI?rel=0'
+            //would be a API call based on muscleMuscle + how to but I can't seem to get the youtube api key working. Would return a video ID that i would add into the embed URL above
+        if ($('#video3').attr('class') === 'auto'){
+          $('.exerciseVideo3').empty();
+        } else {
+        $('.exerciseVideo3').html('<iframe id="video3" width="420" height="315" src='+videoSrc+' frameborder="0" allowfullscreen wmode="Opaque"></iframe>')
+        $('#video3')[0].src += '&autoplay=1';
+        $('#video3').attr('class', 'auto')
+        }
+        response.preventDefault();
       } else if (response.currentTarget.id === 'dropdown-detail-4'){
         $('#detail-4').slideToggle()
+        var videoSrc = 'https://www.youtube.com/embed/xQNrFHEMhI4?rel=0'
+            //would be a API call based on muscleMuscle + how to but I can't seem to get the youtube api key working. Would return a video ID that i would add into the embed URL above
+        if ($('#video4').attr('class') === 'auto'){
+          $('.exerciseVideo4').empty();
+        } else {
+        $('.exerciseVideo4').html('<iframe id="video4" width="420" height="315" src='+videoSrc+' frameborder="0" allowfullscreen wmode="Opaque"></iframe>')
+        $('#video4')[0].src += '&autoplay=1';
+        $('#video4').attr('class', 'auto')
+        }
+        response.preventDefault();
       } else if (response.currentTarget.id === 'dropdown-detail-5'){
         $('#detail-5').slideToggle()
+        var videoSrc = 'https://www.youtube.com/embed/vx0jZBEmZcE?rel=0'
+            //would be a API call based on muscleMuscle + how to but I can't seem to get the youtube api key working. Would return a video ID that i would add into the embed URL above
+        if ($('#video5').attr('class') === 'auto'){
+          $('.exerciseVideo5').empty();
+        } else {
+        $('.exerciseVideo5').html('<iframe id="video5" width="420" height="315" src='+videoSrc+' frameborder="0" allowfullscreen wmode="Opaque"></iframe>')
+        $('#video5')[0].src += '&autoplay=1';
+        $('#video5').attr('class', 'auto')
+        }
+        response.preventDefault();
       } else if (response.currentTarget.id === 'exerciseBack'){
         //have a party
       } else {
@@ -106,7 +184,7 @@ $(document).ready(function(){
       }
     });
     $('#exerciseBackButton').click(function() {
-      $('#exercisecontainer').attr('class', 'container hide')
+      $('#exercisecontainer').attr('class', 'list-group hide')
       $('#workoutcontainer').attr('class', 'list-group workout-group')
       $('#dropdown-detail-1').children('.col-xs-10').text('Exercise 1: Please estimate your one rep max!')
       $('#dropdown-detail-2').children('.col-xs-10').text('Exercise 2: Please estimate your one rep max!')
@@ -151,7 +229,7 @@ $(document).ready(function(){
 
   function workoutTypeSelection(response){
     function toggleViews(){
-      $('#exercisecontainer').attr('class', 'container');
+      $('#exercisecontainer').attr('class', 'list-group');
       $('#workoutcontainer').attr('class', 'list-group workout-group hide');
       $('.instruction').empty();
       $('.instruction').text('Here is your '+currentMuscle.toLowerCase()+' workout to '+response.toLowerCase()+'!');
