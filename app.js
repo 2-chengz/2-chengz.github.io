@@ -12,12 +12,14 @@ var routineObject = {}
 var db = firebase.database();
 
 $(document).ready(function(){
+
   var muscleGroups = ['Back', 'Chest', 'Leg', 'Core', 'Arm', 'Shoulder', 'Full Body']
   var muscleGroupsNav = ['Back', 'Chest', 'Leg', 'Core', 'Arm', 'Shoulder', 'Full Body', 'FullBody']
   var workoutTypes = ['Increase Strength', 'Increase Size', 'Test One Rep Max', 'Return to Muscle Group Selector']
   var currentMuscle ='';
   var currentWorkout = '';
 
+//logic for creation of workout and sets for exercise list after inputing 1RM
   $('.btn').on('click', function(){
     if ($('.oneRepAmount').val() === ''){
       alert('Please estimate your one rep max. A rough estimate is good enough!')
@@ -110,7 +112,7 @@ $(document).ready(function(){
 
   });
 
-
+//logic for toggle of exercise list. Loads workout rep/set/weight and video
   $('[id^=detail-]').hide();
   (function exerciseToggle(){
     $('.toggle').click(function(response) {
@@ -191,6 +193,7 @@ $(document).ready(function(){
       $('#dropdown-detail-3').children('.col-xs-10').text('Exercise 3: Please estimate your one rep max!')
       $('#dropdown-detail-4').children('.col-xs-10').text('Exercise 4: Please estimate your one rep max!')
       $('#dropdown-detail-5').children('.col-xs-10').text('Exercise 5: Please estimate your one rep max!')
+      //need to reset videos that have been created previously
       $('.oneRepAmount').val('')
       if (currentMuscle === 'FullBody'){
         $('.instruction').empty();
@@ -203,6 +206,7 @@ $(document).ready(function(){
     });
   })();
 
+// logic for selecting a muscle group
   function muscleGroupSelection(response){
     $('.workout-group').empty();
     // console.log('that should have removed the list')
@@ -227,6 +231,7 @@ $(document).ready(function(){
     $('.workout-group').attr('id', "workoutcontainer")
   }
 
+//logic for selecting a workout screen
   function workoutTypeSelection(response){
     function toggleViews(){
       $('#exercisecontainer').attr('class', 'list-group');
@@ -268,6 +273,7 @@ $(document).ready(function(){
     }
   };
 
+//listeners
   (function muscleGroupListener(){
     $('.workout-group').on('click', 'a', function(response){
       event.preventDefault();
